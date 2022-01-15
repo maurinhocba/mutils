@@ -163,6 +163,8 @@ def harmo_genalg_2(t, f, bounds):
     
     if result.success==True:
         C1, S1, om1, C2, S2, om2 = result.x
+        if om1>om2:
+            C1, S1, om1, C2, S2, om2 = C2, S2, om2, C1, S1, om1
         # Mean squared error
         mse = (np.sum(  np.power( test(C1, S1, om1, C2, S2, om2) - f, 2 )  ))/t.size
         return (C1, S1, om1, C2, S2, om2, mse)
@@ -220,6 +222,8 @@ def harmo_genalg_2e(t, f, bounds):
     
     if result.success==True:
         C1, S1, om1, C2, S2, om2, D, A, B = result.x
+        if om1>om2:
+            C1, S1, om1, C2, S2, om2 = C2, S2, om2, C1, S1, om1
         # Mean squared error
         mse = (np.sum(  np.power( test(C1, S1, om1, C2, S2, om2, D, A, B) - f, 2 )  ))/t.size
         return (C1, S1, om1, C2, S2, om2, D, A, B, mse)
